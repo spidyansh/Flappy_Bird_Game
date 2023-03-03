@@ -4,10 +4,12 @@ let bird = document.querySelector(".bird");
 let img = document.getElementById("bird-1");
 
 let bird_props = bird.getBoundingClientRect();
+
 let background = document.querySelector(".background").getBoundingClientRect();
+
 let score_val = document.querySelector(".score_val");
 let message = document.querySelector(".message");
-let score_title = document.querySelector(".scote_title");
+let score_title = document.querySelector(".score_title");
 
 let game_state = "start";
 img.style.display = "none";
@@ -22,16 +24,16 @@ document.addEventListener("keydown", (e) => {
     bird.style.top = "40vh";
     game_state = "Play";
     message.innerHTML = "";
-    score_title.innerHTML = "score : ";
+    score_title.innerHTML = "Score : ";
     score_val.innerHTML = "0";
     message.classList.remove("messageStyle");
-    Play();
+    play();
   }
 });
 
 function play() {
   function move() {
-    if (game_state != "play") return;
+    if (game_state != "Play") return;
     let pipe_sprite = document.querySelectorAll(".pipe_sprite");
     pipe_sprite.forEach((element) => {
       let pipe_sprite_props = element.getBoundingClientRect();
@@ -58,7 +60,7 @@ function play() {
             pipe_sprite_props.right + move_speed >= bird_props.left &&
             element.increase_score == "1"
           ) {
-            score_val.innerHTML = +score_val.innerHTML + 1;
+            score_val.innerHTML =+ score_val.innerHTML + 1;
           }
           element.style.left = pipe_sprite_props.left - move_speed + "px";
         }
@@ -80,7 +82,7 @@ function play() {
     });
     document.addEventListener("keyup", (e) => {
       if (e.key == "ArrowUp" || e.key == " ") {
-        img.src = "iamges/Bird.png";
+        img.src = "images/Bird.png";
       }
     });
     if (bird_props.top <= 0 || bird_props.bottom >= background.bottom) {
@@ -90,7 +92,7 @@ function play() {
       message.classList.remove("messageStyle");
       return;
     }
-    bird.styele.top = bird_props.top + bird_dy + "px";
+    bird.style.top = bird_props.top + bird_dy + "px";
     bird_props = bird.getBoundingClientRect();
     requestAnimationFrame(apply_gravity);
   }
@@ -113,7 +115,7 @@ function play() {
       let pipe_sprite = document.createElement("div");
       pipe_sprite.className = "pipe_sprite";
       pipe_sprite.style.top = pipe_posi + pipe_gap + "vh";
-      pipe_sprite.styel.left - "100vw";
+      pipe_sprite.style.left - "100vw";
       pipe_sprite.increase_score = "1";
 
       document.body.appendChild(pipe_sprite);
